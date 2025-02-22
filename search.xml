@@ -70,11 +70,11 @@
 <p>首先安装nodejs</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl -fsSL https://deb.nodesource.com/setup_20.x | <span class="built_in">sudo</span> bash -</span><br><span class="line"><span class="built_in">sudo</span> apt-get install -y nodejs</span><br></pre></td></tr></table></figure>
 
-<p>安装一些包：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 安装hexo</span></span><br><span class="line"><span class="built_in">sudo</span> npm install -g hexo</span><br><span class="line"><span class="comment"># 安装相关插件</span></span><br><span class="line"><span class="built_in">sudo</span> npm install hexo-word-counter hexo-blog-encrypt hexo-filter-mathjax hexo-deployer-git hexo-generator-searchdb hexo-leancloud-counter-security</span><br></pre></td></tr></table></figure>
+<p>安装hexo：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 安装hexo</span></span><br><span class="line"><span class="built_in">sudo</span> npm install -g hexo</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<p>建立一个文件夹，然后初始化hexo</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> hexo-site &amp;&amp; <span class="built_in">cd</span> hexo-site</span><br><span class="line">hexo init</span><br><span class="line"></span><br><span class="line"><span class="built_in">sudo</span> npm install</span><br><span class="line"></span><br><span class="line">hexo clean</span><br><span class="line">hexo generate</span><br><span class="line">hexo server -p 23817</span><br></pre></td></tr></table></figure>
+<h2 id="初始化hexo"><a href="#初始化hexo" class="headerlink" title="初始化hexo"></a>初始化hexo</h2><p>建立一个文件夹，然后初始化hexo</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> hexo-site &amp;&amp; <span class="built_in">cd</span> hexo-site</span><br><span class="line">hexo init</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装相关插件</span></span><br><span class="line"><span class="built_in">sudo</span> npm install hexo-word-counter hexo-blog-encrypt hexo-filter-mathjax hexo-deployer-git hexo-generator-searchdb hexo-leancloud-counter-security</span><br><span class="line"><span class="comment"># sudo npm install</span></span><br><span class="line"></span><br><span class="line">hexo clean</span><br><span class="line">hexo generate</span><br><span class="line">hexo server -p 23817</span><br></pre></td></tr></table></figure>
 
 <p>可以修改<code>_config.yml</code>文件</p>
 <figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">  <span class="attr">repo:</span> <span class="string">https://github.com/xxxx/xxxx.github.io.git</span></span><br><span class="line">  <span class="attr">branch:</span> <span class="string">main</span></span><br></pre></td></tr></table></figure>
@@ -82,7 +82,7 @@
 <p>然后部署到github</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo deploy</span><br></pre></td></tr></table></figure>
 
-<p>可以更换主题，例如<a href="https://github.com/next-theme/hexo-theme-next"><code>hexo-theme-next</code></a></p>
+<h2 id="更换主题"><a href="#更换主题" class="headerlink" title="更换主题"></a>更换主题</h2><p>可以更换主题，例如<a href="https://github.com/next-theme/hexo-theme-next"><code>hexo-theme-next</code></a></p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 在hexo-site目录下</span></span><br><span class="line">git <span class="built_in">clone</span> https://github.com/next-theme/hexo-theme-next themes/next</span><br></pre></td></tr></table></figure>
 
 <p>更改<code>hexo-site/_config.yml</code>文件</p>
@@ -91,7 +91,7 @@
 <p>然后重新生成和部署</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo generate</span><br><span class="line">hexo deploy</span><br></pre></td></tr></table></figure>
 
-<p>可以继续更改<code>hexo-site/themes/next/_config.yml</code>文件，增加菜单栏</p>
+<h2 id="增加菜单栏"><a href="#增加菜单栏" class="headerlink" title="增加菜单栏"></a>增加菜单栏</h2><p>可以继续更改<code>hexo-site/themes/next/_config.yml</code>文件，增加菜单栏</p>
 <figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">menu:</span></span><br><span class="line">  <span class="attr">home:</span> <span class="string">/</span> <span class="string">||</span> <span class="string">fa</span> <span class="string">fa-home</span></span><br><span class="line">  <span class="attr">categories:</span> <span class="string">/categories/</span> <span class="string">||</span> <span class="string">fa</span> <span class="string">fa-th</span></span><br><span class="line">  <span class="attr">archives:</span> <span class="string">/archives/</span> <span class="string">||</span> <span class="string">fa</span> <span class="string">fa-archive</span></span><br><span class="line">  <span class="attr">tags:</span> <span class="string">/tags/</span> <span class="string">||</span> <span class="string">fa</span> <span class="string">fa-tags</span></span><br><span class="line">  <span class="attr">about:</span> <span class="string">/about/</span> <span class="string">||</span> <span class="string">fa</span> <span class="string">fa-user</span></span><br><span class="line">  <span class="comment">#schedule: /schedule/ || fa fa-calendar</span></span><br><span class="line">  <span class="comment">#sitemap: /sitemap.xml || fa fa-sitemap</span></span><br><span class="line">  <span class="comment">#commonweal: /404/ || fa fa-heartbeat</span></span><br></pre></td></tr></table></figure>
 
 <p>然后需要生成相关page</p>
@@ -100,25 +100,25 @@
 <p>在相应的<code>hexo-site/source/tags/index.md</code>文件中添加</p>
 <figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">title:</span> <span class="string">Tags</span></span><br><span class="line"><span class="attr">date:</span> <span class="number">2025-02-19 19:17:35</span></span><br><span class="line"><span class="attr">type:</span> <span class="string">&quot;tags&quot;</span></span><br><span class="line"><span class="meta">---</span></span><br></pre></td></tr></table></figure>
 
-<p>也可以生成post</p>
+<h2 id="增加文章"><a href="#增加文章" class="headerlink" title="增加文章"></a>增加文章</h2><p>也可以生成post</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo new <span class="string">&quot;Hello World&quot;</span></span><br></pre></td></tr></table></figure>
 <p>并在<code>hexo-site/source/_posts/</code>目录下编辑相关文件。</p>
-<p>文章在主页显示摘要，修改<code>hexo-site/themes/next/_config.yml</code>文件</p>
+<h2 id="主页显示摘要"><a href="#主页显示摘要" class="headerlink" title="主页显示摘要"></a>主页显示摘要</h2><p>文章在主页显示摘要，修改<code>hexo-site/themes/next/_config.yml</code>文件</p>
 <figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Use `description` in front-matter to specify post excerpt.</span></span><br><span class="line"><span class="attr">excerpt_description:</span> <span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Read more button</span></span><br><span class="line"><span class="comment"># If true, the read more button will be displayed in excerpt section.</span></span><br><span class="line"><span class="attr">read_more_btn:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
 
 <p>并在文章中使用<code>&lt;!-- more --&gt;</code>来分割文章。</p>
-<p>可以继续更改<code>hexo-site/_config.yml</code>文件</p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 修改title</span></span><br><span class="line"><span class="attr">title:</span> <span class="string">Hexo</span></span><br><span class="line"><span class="comment"># 修改language</span></span><br><span class="line"><span class="attr">language:</span> <span class="string">zh-CN</span></span><br><span class="line"><span class="comment"># 修改url</span></span><br><span class="line"><span class="attr">url:</span> <span class="string">http://example.com</span></span><br></pre></td></tr></table></figure>
-
-<p>增加文章字数和阅读时间统计，修改<code>hexo-site/themes/next/_config.yml</code>文件</p>
+<h2 id="字数和阅读时间统计"><a href="#字数和阅读时间统计" class="headerlink" title="字数和阅读时间统计"></a>字数和阅读时间统计</h2><p>增加文章字数和阅读时间统计，修改<code>hexo-site/themes/next/_config.yml</code>文件</p>
 <figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 需要安装hexo-word-counter</span></span><br><span class="line"><span class="attr">symbols_count_time:</span></span><br><span class="line">  <span class="attr">separated_meta:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">item_text_total:</span> <span class="literal">false</span></span><br></pre></td></tr></table></figure>
 
-<p>文章加密，修改<code>hexo-site/themes/next/_config.yml</code>文件，可以查看这篇文章<a href="https://www.itfanr.cc/2021/04/16/hexo-blog-article-encryption/">hexo-blog-encrypt</a>。</p>
+<h2 id="文章加密"><a href="#文章加密" class="headerlink" title="文章加密"></a>文章加密</h2><p>文章加密，修改<code>hexo-site/themes/next/_config.yml</code>文件，可以查看这篇文章<a href="https://www.itfanr.cc/2021/04/16/hexo-blog-article-encryption/">hexo-blog-encrypt</a>。</p>
+<h2 id="其他相关配置"><a href="#其他相关配置" class="headerlink" title="其他相关配置"></a>其他相关配置</h2><p>可以继续更改<code>hexo-site/_config.yml</code>文件</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 修改title</span></span><br><span class="line"><span class="attr">title:</span> <span class="string">Hexo</span></span><br><span class="line"><span class="comment"># 修改language</span></span><br><span class="line"><span class="attr">language:</span> <span class="string">zh-CN</span></span><br><span class="line"><span class="comment"># 修改url</span></span><br><span class="line"><span class="attr">url:</span> <span class="string">http://example.com</span></span><br></pre></td></tr></table></figure>
+
 <p>可以继续参考这篇文章<a href="https://theme-next.js.org/docs/getting-started/">hexo next配置</a>和这篇文章<a href="https://blog.rexking6.top/2021/07/10/hexo%E5%8D%87%E7%BA%A7/">blog.rexking6</a>，修改<code>hexo-site/themes/next/_config.yml</code>文件相关配置。</p>
 <p>其中增加数学公式支持，修改<code>hexo-site/themes/next/_config.yml</code>文件</p>
 <figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 需要安装hexo-filter-mathjax</span></span><br><span class="line"><span class="attr">math:</span></span><br><span class="line">  <span class="attr">mathjax:</span></span><br><span class="line">    <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">    <span class="comment"># Available values: none | ams | all</span></span><br><span class="line">    <span class="attr">tags:</span> <span class="string">ams</span></span><br></pre></td></tr></table></figure>
 
-<p>可以使用阿里云OSS和<a href="https://github.com/Molunerfinn/PicGo">PicGO</a>搭建图床。</p>
+<h2 id="图床"><a href="#图床" class="headerlink" title="图床"></a>图床</h2><p>可以使用阿里云OSS和<a href="https://github.com/Molunerfinn/PicGo">PicGO</a>搭建图床。</p>
 <p>以下是图床图片测试<br><img data-src="https://zzh-blog-data.oss-cn-hangzhou.aliyuncs.com/img/20250220133221268.png" alt="cat gen by AI"></p>
 ]]></content>
       <tags>
