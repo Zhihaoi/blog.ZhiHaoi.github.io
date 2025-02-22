@@ -1,68 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>大模型应用平台</title>
-    <url>/2025/02/21/ai-res/</url>
-    <content><![CDATA[<h1 id="基于网页的问答平台"><a href="#基于网页的问答平台" class="headerlink" title="基于网页的问答平台"></a>基于网页的问答平台</h1><span id="more"></span>
-
-<ol>
-<li><p><strong>阿里千问</strong> <a href="https://chat.qwenlm.ai/">链接</a>，支持Qwen等模型，支持Artifacts、Web Search、Image Generation、Video Generation等功能。</p>
-</li>
-<li><p><strong>阿里通义</strong> <a href="https://tongyi.aliyun.com/">链接</a>，支持Qwen等模型，支持代码模式、深度搜索、PPT创作、指令中心等功能。</p>
-</li>
-<li><p><strong>腾讯元宝</strong> <a href="https://yuanbao.tencent.com/">链接</a>，支持Hunyuan、DeepSeek等模型，支持深度思考、联网搜索等功能。</p>
-</li>
-<li><p><strong>华为小艺</strong> <a href="https://xiaoyi.huawei.com/chat/">链接</a>，支持DeepSeek等模型，支持深度思考等功能。</p>
-</li>
-<li><p><strong>知乎直答</strong> <a href="https://zhida.zhihu.com/">链接</a>，支持DeepSeek等模型，支持深度思考等功能，可以有效搜索知乎内容！！！</p>
-</li>
-<li><p><strong>火山方舟</strong> <a href="https://www.volcengine.com/experience/ark">链接</a>，支持DeepSeek等模型，支持深度思考、联网搜索等功能。</p>
-</li>
-<li><p><strong>DeepSeek官方</strong> <a href="https://chat.deepseek.com/">链接</a>，支持DeepSeek等模型，支持深度思考、联网搜索等功能，目前使用人数较多，经常遇到“服务器繁忙，请稍后再试。”的情况。</p>
-</li>
-</ol>
-<p>GPT、Claude、Gemini、Grok等模型与应用平台不再列举。</p>
-<h1 id="云平台"><a href="#云平台" class="headerlink" title="云平台"></a>云平台</h1><ol>
-<li><p><strong>阿里云百炼</strong> <a href="https://www.aliyun.com/product/bailian#/home">链接</a>，支持Qwen、DeepSeek等模型的API、部署、训练和开发。</p>
-</li>
-<li><p><strong>华为ModelArts</strong> <a href="https://www.huaweicloud.com/product/modelarts/studio.html">链接</a>，支持Qwen、DeepSeek等模型的API、部署、训练和开发。</p>
-</li>
-<li><p><strong>腾讯混元</strong> <a href="https://cloud.tencent.com/product/hunyuan">链接</a>，支持Hunyuan等模型的接入，可以使用混元生图生成图片。</p>
-</li>
-<li><p><strong>腾讯云TI平台</strong> <a href="https://cloud.tencent.com/product/ti">链接</a>，支持Hunyuan、DeepSeek等模型的API、部署、训练和开发。</p>
-</li>
-<li><p><strong>Gitee AI平台</strong> <a href="https://ai.gitee.com/">链接</a>，支持Qwen、DeepSeek等模型的API、微调等功能，同时类似Hugging Face提供了一些模型和数据集。</p>
-</li>
-<li><p><strong>有道智云</strong> <a href="https://ai.youdao.com/">链接</a>，提供支持翻译功能的API，支持DeepSeek等模型。</p>
-</li>
-<li><p><strong>火山方舟</strong> <a href="https://www.volcengine.com/product/ark">链接</a>，支持Doubao、DeepSeek等模型的API、应用、训练和精调，支持Prompt生成、调优和管理。</p>
-</li>
-</ol>
-<h1 id="IDE和Extensions"><a href="#IDE和Extensions" class="headerlink" title="IDE和Extensions"></a>IDE和Extensions</h1><ol>
-<li><p><strong>Cursor</strong> <a href="https://www.cursor.com/">链接</a>，AI code IDE，支持大部分模型。</p>
-</li>
-<li><p><strong>Cline</strong> <a href="https://github.com/cline/cline">链接</a>，AI code插件，支持大部分模型。</p>
-</li>
-<li><p><strong>Continue</strong> <a href="https://github.com/continuedev/continue">链接</a>，AI code插件，支持大部分模型。</p>
-</li>
-<li><p><strong>Trae</strong> <a href="https://www.trae.ai/">链接</a>，AI code IDE，字节跳动发布的，不知道支持什么模型。</p>
-</li>
-<li><p><strong>Marscode</strong> <a href="https://www.marscode.cn/">链接</a>，AI code IDE和插件，支持Doubao等模型。</p>
-</li>
-<li><p><strong>通义灵码</strong> <a href="https://lingma.aliyun.com/">链接</a>，AI code插件，阿里发布的，支持Qwen等模型。</p>
-</li>
-<li><p><strong>Github Copilot</strong> <a href="https://github.com/features/copilot">链接</a>，AI code插件，支持一部分模型。</p>
-</li>
-</ol>
-]]></content>
-      <categories>
-        <category>LLM</category>
-      </categories>
-      <tags>
-        <tag>LLM</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Hexo和Github Pages搭建博客</title>
     <url>/2025/02/19/hexo-install/</url>
     <content><![CDATA[<h1 id="Hexo安装和配置"><a href="#Hexo安装和配置" class="headerlink" title="Hexo安装和配置"></a>Hexo安装和配置</h1><span id="more"></span>
@@ -123,6 +61,68 @@
 ]]></content>
       <tags>
         <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>大模型应用平台</title>
+    <url>/2025/02/21/ai-res/</url>
+    <content><![CDATA[<h1 id="基于网页的问答平台"><a href="#基于网页的问答平台" class="headerlink" title="基于网页的问答平台"></a>基于网页的问答平台</h1><span id="more"></span>
+
+<ol>
+<li><p><strong>阿里千问</strong> <a href="https://chat.qwenlm.ai/">链接</a>，支持Qwen等模型，支持Artifacts、Web Search、Image Generation、Video Generation等功能。</p>
+</li>
+<li><p><strong>阿里通义</strong> <a href="https://tongyi.aliyun.com/">链接</a>，支持Qwen等模型，支持代码模式、深度搜索、PPT创作、指令中心等功能。</p>
+</li>
+<li><p><strong>腾讯元宝</strong> <a href="https://yuanbao.tencent.com/">链接</a>，支持Hunyuan、DeepSeek等模型，支持深度思考、联网搜索等功能。</p>
+</li>
+<li><p><strong>华为小艺</strong> <a href="https://xiaoyi.huawei.com/chat/">链接</a>，支持DeepSeek等模型，支持深度思考等功能。</p>
+</li>
+<li><p><strong>知乎直答</strong> <a href="https://zhida.zhihu.com/">链接</a>，支持DeepSeek等模型，支持深度思考等功能，可以有效搜索知乎内容！！！</p>
+</li>
+<li><p><strong>火山方舟</strong> <a href="https://www.volcengine.com/experience/ark">链接</a>，支持DeepSeek等模型，支持深度思考、联网搜索等功能。</p>
+</li>
+<li><p><strong>DeepSeek官方</strong> <a href="https://chat.deepseek.com/">链接</a>，支持DeepSeek等模型，支持深度思考、联网搜索等功能，目前使用人数较多，经常遇到“服务器繁忙，请稍后再试。”的情况。</p>
+</li>
+</ol>
+<p>GPT、Claude、Gemini、Grok等模型与应用平台不再列举。</p>
+<h1 id="云平台"><a href="#云平台" class="headerlink" title="云平台"></a>云平台</h1><ol>
+<li><p><strong>阿里云百炼</strong> <a href="https://www.aliyun.com/product/bailian#/home">链接</a>，支持Qwen、DeepSeek等模型的API、部署、训练和开发。</p>
+</li>
+<li><p><strong>华为ModelArts</strong> <a href="https://www.huaweicloud.com/product/modelarts/studio.html">链接</a>，支持Qwen、DeepSeek等模型的API、部署、训练和开发。</p>
+</li>
+<li><p><strong>腾讯混元</strong> <a href="https://cloud.tencent.com/product/hunyuan">链接</a>，支持Hunyuan等模型的接入，可以使用混元生图生成图片。</p>
+</li>
+<li><p><strong>腾讯云TI平台</strong> <a href="https://cloud.tencent.com/product/ti">链接</a>，支持Hunyuan、DeepSeek等模型的API、部署、训练和开发。</p>
+</li>
+<li><p><strong>Gitee AI平台</strong> <a href="https://ai.gitee.com/">链接</a>，支持Qwen、DeepSeek等模型的API、微调等功能，同时类似Hugging Face提供了一些模型和数据集。</p>
+</li>
+<li><p><strong>有道智云</strong> <a href="https://ai.youdao.com/">链接</a>，提供支持翻译功能的API，支持DeepSeek等模型。</p>
+</li>
+<li><p><strong>火山方舟</strong> <a href="https://www.volcengine.com/product/ark">链接</a>，支持Doubao、DeepSeek等模型的API、应用、训练和精调，支持Prompt生成、调优和管理。</p>
+</li>
+</ol>
+<h1 id="IDE和Extensions"><a href="#IDE和Extensions" class="headerlink" title="IDE和Extensions"></a>IDE和Extensions</h1><ol>
+<li><p><strong>Cursor</strong> <a href="https://www.cursor.com/">链接</a>，AI code IDE，支持大部分模型。</p>
+</li>
+<li><p><strong>Cline</strong> <a href="https://github.com/cline/cline">链接</a>，AI code插件，支持大部分模型。</p>
+</li>
+<li><p><strong>Continue</strong> <a href="https://github.com/continuedev/continue">链接</a>，AI code插件，支持大部分模型。</p>
+</li>
+<li><p><strong>Trae</strong> <a href="https://www.trae.ai/">链接</a>，AI code IDE，字节跳动发布的，不知道支持什么模型。</p>
+</li>
+<li><p><strong>Marscode</strong> <a href="https://www.marscode.cn/">链接</a>，AI code IDE和插件，支持Doubao等模型。</p>
+</li>
+<li><p><strong>通义灵码</strong> <a href="https://lingma.aliyun.com/">链接</a>，AI code插件，阿里发布的，支持Qwen等模型。</p>
+</li>
+<li><p><strong>Github Copilot</strong> <a href="https://github.com/features/copilot">链接</a>，AI code插件，支持一部分模型。</p>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>LLM</category>
+      </categories>
+      <tags>
+        <tag>LLM</tag>
       </tags>
   </entry>
 </search>
