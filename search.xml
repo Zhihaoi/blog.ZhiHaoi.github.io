@@ -65,29 +65,6 @@
       </tags>
   </entry>
   <entry>
-    <title>VectorCDC论文浅读</title>
-    <url>/2025/02/23/vectorcdc/</url>
-    <content><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="抱歉，您输入的密码错误，请检查后重新输入。" data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
-  <script id="hbeData" type="hbeData" data-hmacdigest="0d7429f56dcbfe82adabd48a1b6b2d8715fc743fde46a0c01b00961911c49fd9">094aa646378d721618637df0908458ae77e8c47bfc8b5669bfe1b22808b0f2999b2c2385a19bb2ab3d64ebbf43cb743add3e743b0bbc3b59765be8293a69773e22f2224df5ac8e29e01de50946b7fdf437514117365ee157d8fb7094e12c01264d072cc0e12066f1421c7a1b45c8f7405dbef43b28e392812bf25a7c4a6c2cb2c0e38e243179ee909ea4d5dcb1896d64f766d6688bbaf97957adc06d5c40a341970bccf544898fb0928806ca75ebcef24dde58c7590e3a1a7a16453a40cf4048</script>
-  <div class="hbe hbe-content">
-    <div class="hbe hbe-input hbe-input-default">
-      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
-      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
-        <span class="hbe hbe-input-label-content hbe-input-label-content-default">当前文章暂不对外可见，请输入密码后查看！</span>
-      </label>
-    </div>
-  </div>
-</div>
-<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
-      <categories>
-        <category>VectorCDC</category>
-      </categories>
-      <tags>
-        <tag>deduplication</tag>
-        <tag>paper</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Hexo和Github Pages搭建博客</title>
     <url>/2025/02/19/hexo-install/</url>
     <content><![CDATA[<h1 id="Hexo安装和配置"><a href="#Hexo安装和配置" class="headerlink" title="Hexo安装和配置"></a>Hexo安装和配置</h1><span id="more"></span>
@@ -148,6 +125,26 @@
 ]]></content>
       <tags>
         <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>VectorCDC论文浅读</title>
+    <url>/2025/02/23/vectorcdc/</url>
+    <content><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="抱歉，您输入的密码错误，请检查后重新输入。" data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
+  <script id="hbeData" type="hbeData" data-hmacdigest="0d7429f56dcbfe82adabd48a1b6b2d8715fc743fde46a0c01b00961911c49fd9">094aa646378d721618637df0908458ae77e8c47bfc8b5669bfe1b22808b0f2999b2c2385a19bb2ab3d64ebbf43cb743add3e743b0bbc3b59765be8293a69773e22f2224df5ac8e29e01de50946b7fdf437514117365ee157d8fb7094e12c01264d072cc0e12066f1421c7a1b45c8f7405dbef43b28e392812bf25a7c4a6c2cb2c0e38e243179ee909ea4d5dcb1896d64f766d6688bbaf97957adc06d5c40a341970bccf544898fb0928806ca75ebcef24dde58c7590e3a1a7a16453a40cf4048</script>
+  <div class="hbe hbe-content">
+    <div class="hbe hbe-input hbe-input-default">
+      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
+      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
+        <span class="hbe hbe-input-label-content hbe-input-label-content-default">当前文章暂不对外可见，请输入密码后查看！</span>
+      </label>
+    </div>
+  </div>
+</div>
+<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
+      <tags>
+        <tag>deduplication</tag>
+        <tag>paper</tag>
       </tags>
   </entry>
 </search>
