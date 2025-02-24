@@ -46,7 +46,7 @@
 <h1 id="IDE和Extensions"><a href="#IDE和Extensions" class="headerlink" title="IDE和Extensions"></a>IDE和Extensions</h1><ol>
 <li><p><strong>Cursor</strong> <a href="https://www.cursor.com/">链接</a>，AI code IDE，支持大部分模型，支持自定义模型。</p>
 </li>
-<li><p><strong>Cline</strong> <a href="https://github.com/cline/cline">链接</a>，AI code插件，支持大部分模型，支持自定义模型。</p>
+<li><p><strong>Cline</strong> <a href="https://github.com/cline/cline">链接</a>，AI code插件，支持大部分模型，支持自定义模型，可以自动进行代码读取、编辑、修改和编译等。我使用claude-3-5-sonnet测试修改了259行代码，花费0.8美元，开销较大。</p>
 </li>
 <li><p><strong>Continue</strong> <a href="https://github.com/continuedev/continue">链接</a>，AI code插件，支持大部分模型。</p>
 </li>
@@ -56,7 +56,7 @@
 </li>
 <li><p><strong>通义灵码</strong> <a href="https://lingma.aliyun.com/">链接</a>，AI code插件，阿里发布的，支持Qwen等模型。</p>
 </li>
-<li><p><strong>Github Copilot</strong> <a href="https://github.com/features/copilot">链接</a>，AI code插件，支持一部分模型。</p>
+<li><p><strong>Github Copilot</strong> <a href="https://github.com/features/copilot">链接</a>，AI code插件，支持一部分模型，每月订阅价10美元，可以补全，可以chat，用起来不错。</p>
 </li>
 </ol>
 ]]></content>
