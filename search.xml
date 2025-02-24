@@ -44,13 +44,13 @@
 </li>
 </ol>
 <h1 id="IDE和Extensions"><a href="#IDE和Extensions" class="headerlink" title="IDE和Extensions"></a>IDE和Extensions</h1><ol>
-<li><p><strong>Cursor</strong> <a href="https://www.cursor.com/">链接</a>，AI code IDE，支持大部分模型。</p>
+<li><p><strong>Cursor</strong> <a href="https://www.cursor.com/">链接</a>，AI code IDE，支持大部分模型，支持自定义模型。</p>
 </li>
-<li><p><strong>Cline</strong> <a href="https://github.com/cline/cline">链接</a>，AI code插件，支持大部分模型。</p>
+<li><p><strong>Cline</strong> <a href="https://github.com/cline/cline">链接</a>，AI code插件，支持大部分模型，支持自定义模型。</p>
 </li>
 <li><p><strong>Continue</strong> <a href="https://github.com/continuedev/continue">链接</a>，AI code插件，支持大部分模型。</p>
 </li>
-<li><p><strong>Trae</strong> <a href="https://www.trae.ai/">链接</a>，AI code IDE，字节跳动发布的，不知道支持什么模型。</p>
+<li><p><strong>Trae</strong> <a href="https://www.trae.ai/">链接</a>，AI code IDE，字节跳动发布的，支持claude等模型。</p>
 </li>
 <li><p><strong>Marscode</strong> <a href="https://www.marscode.cn/">链接</a>，AI code IDE和插件，支持Doubao等模型。</p>
 </li>
