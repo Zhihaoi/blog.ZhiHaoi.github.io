@@ -66,36 +66,6 @@
       </tags>
   </entry>
   <entry>
-    <title>FlacIO论文浅读</title>
-    <url>/2025/02/26/flacio/</url>
-    <content><![CDATA[<p>……</p>
-<span id="more"></span>
-
-<p>FlacIO<a href="#FlacIO">[1]</a>是存储顶会FAST’25的论文，研究方向是容器镜像加速。因为我最近在做一些云计算和虚拟化相关的研究和工作，所以对这篇论文很感兴趣，这里记录一下我对这篇论文的理解、总结和思考。因本人水平有限，如有错误，欢迎指正。</p>
-<h1 id="背景和相关知识"><a href="#背景和相关知识" class="headerlink" title="背景和相关知识"></a>背景和相关知识</h1><h2 id="容器镜像加速"><a href="#容器镜像加速" class="headerlink" title="容器镜像加速"></a>容器镜像加速</h2><p>容器使用较为广泛。容器镜像（container image）的存储栈，通常由远程镜像仓库（remote registry）负责镜像的存储与管理，以及主机节点上的存储驱动（storage driver）用于拉取（pull）镜像并挂载根文件系统（root file system）。一个容器镜像由底部的多个只读层（read-only layer）和顶部的一个可写层（writable layer）构成。Storage driver一般使用OverlayFS来堆叠镜像文件，同时管理根文件系统。</p>
-<p>Cold startup需要从远程仓库拉取image并在主机节点上启动容器，由于在容器启动时只需要使用镜像中的一小部分数据，full image loading会有较长的容器启动延迟，同时网络带宽利用率也较低。目前有两种优化方法。</p>
-<ol>
-<li>Cold Startup Acceleration. 主流的优化方法是使用lazy loading来加速容器启动。Lazy loading先加载好镜像metadata，然后再按需加载（on-demand）容器启动时需要的镜像数据，需要哪块就pull &amp; load哪块。比较知名且使用广泛的有CRFS<a href="#CRFS">[2]</a>和DADI<a href="#DADI">[3]</a>。CRFS基于FUSE（Filesystem in Userspace），是文件系统层的镜像加速方法，同时提供了stargz的镜像格式。DADI基于TCMU（iSCSI block device in Userspace），是块层的镜像加速方法，也提供了zfile镜像格式。</li>
-</ol>
-<p>Lazy loading进行容器启动时，会频繁地触发I/O操作，并且阻塞镜像服务。现有的lazy loading方法使用预取（prefetching）来减轻这个过程的影响。CRFS允许用户在镜像创建过程中将文件按照优先级排列以进行预取。DADI可以通过定制的虚拟块设备（virtual block device）记录块I/O trace，然后在容器启动时根据这些trace预取数据。</p>
-<ol start="2">
-<li>Cold Startup Mitigation. 还有一些方法旨在减少容器冷启动频率，例如Caching/Sharing，主要是hot/idel containers共享；例如Fork，定制和优化fork机制，基于其他进程快速启动容器；例如P2P Loading，从相邻的peer快速拉取镜像数据。</li>
-</ol>
-<h2 id="Lazy-Loading"><a href="#Lazy-Loading" class="headerlink" title="Lazy Loading"></a>Lazy Loading</h2><p>下图展示了file-level和block-level lazy loading系统。</p>
-<p><img data-src="https://zzh-blog-data.oss-cn-hangzhou.aliyuncs.com/img/20250304161527259.png"></p>
-<p>File-level lazy loading系统通常基于OverlayFS，其堆叠（stack）在本地文件系统之上，有四层：lower layer是镜像只读层和目录；upper layer是对只读层的修改；work layer短暂存储文件系统操作的中间状态；merge layer整合upper layer和lower layer，为容器提供文件系统的unified view。容器对根文件系统的访问操作都被OverlayFS重定向到本地的文件系统。</p>
-<p>Page miss时，本地文件系统通知lazy loading module需要从registry上拉取镜像数据。为了减少拉取开销，使用cache来预取和缓存将要使用的page。Block-level lazy loading系统的overlay特性和prefetch cache是基于block layer的。</p>
-<h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><p><a name="FlacIO"></a><br>[1] <a href="https://www.usenix.org/conference/fast25/presentation/liu-yubo">FlacIO: Flat and Collective I/O for Container Image Service</a>.<br><a name="CRFS"></a><br>[2] <a href="https://github.com/google/crfs">Google CRFS</a>.<br><a name="DADI"></a><br>[3] <a href="https://www.usenix.org/conference/atc20/presentation/li-huiba">DADI block-level image service for agile and elastic application deployment</a>.</p>
-]]></content>
-      <categories>
-        <category>Paper</category>
-      </categories>
-      <tags>
-        <tag>Container</tag>
-        <tag>Paper</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Hexo和Github Pages搭建博客</title>
     <url>/2025/02/19/hexo-install/</url>
     <content><![CDATA[<p>……</p>
@@ -157,6 +127,36 @@
 ]]></content>
       <tags>
         <tag>Hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>FlacIO论文浅读</title>
+    <url>/2025/02/26/flacio/</url>
+    <content><![CDATA[<p>……</p>
+<span id="more"></span>
+
+<p>FlacIO<a href="#FlacIO">[1]</a>是存储顶会FAST25的论文，研究方向是容器镜像加速。因为我最近在做一些云计算和虚拟化相关的研究和工作，所以对这篇论文很感兴趣，这里记录一下我对这篇论文的理解、总结和思考。因本人水平有限，如有错误，欢迎指正。</p>
+<h1 id="背景和相关知识"><a href="#背景和相关知识" class="headerlink" title="背景和相关知识"></a>背景和相关知识</h1><h2 id="容器镜像加速"><a href="#容器镜像加速" class="headerlink" title="容器镜像加速"></a>容器镜像加速</h2><p>容器使用较为广泛。容器镜像（container image）的存储栈，通常由远程镜像仓库（remote registry）负责镜像的存储与管理，以及主机节点上的存储驱动（storage driver）用于拉取（pull）镜像并挂载根文件系统（root file system）。一个容器镜像由底部的多个只读层（read-only layer）和顶部的一个可写层（writable layer）构成。Storage driver一般使用OverlayFS来堆叠镜像文件，同时管理根文件系统。</p>
+<p>Cold startup需要从远程仓库拉取image并在主机节点上启动容器，由于在容器启动时只需要使用镜像中的一小部分数据，full image loading会有较长的容器启动延迟，同时网络带宽利用率也较低。目前有两种优化方法。</p>
+<ol>
+<li>Cold Startup Acceleration. 主流的优化方法是使用lazy loading来加速容器启动。Lazy loading先加载好镜像metadata，然后再按需加载（on-demand）容器启动时需要的镜像数据，需要哪块就pull &amp; load哪块。比较知名且使用广泛的有CRFS<a href="#CRFS">[2]</a>和DADI<a href="#DADI">[3]</a>。CRFS基于FUSE（Filesystem in Userspace），是文件系统层的镜像加速方法，同时提供了stargz的镜像格式。DADI基于TCMU（iSCSI block device in Userspace），是块层的镜像加速方法，也提供了zfile镜像格式。</li>
+</ol>
+<p>Lazy loading进行容器启动时，会频繁地触发I/O操作，并且阻塞镜像服务。现有的lazy loading方法使用预取（prefetching）来减轻这个过程的影响。CRFS允许用户在镜像创建过程中将文件按照优先级排列以进行预取。DADI可以通过定制的虚拟块设备（virtual block device）记录块I/O trace，然后在容器启动时根据这些trace预取数据。</p>
+<ol start="2">
+<li>Cold Startup Mitigation. 还有一些方法旨在减少容器冷启动频率，例如Caching/Sharing，主要是hot/idel containers共享；例如Fork，定制和优化fork机制，基于其他进程快速启动容器；例如P2P Loading，从相邻的peer快速拉取镜像数据。</li>
+</ol>
+<h2 id="Lazy-Loading"><a href="#Lazy-Loading" class="headerlink" title="Lazy Loading"></a>Lazy Loading</h2><p>下图展示了file-level和block-level lazy loading系统。</p>
+<p><img data-src="https://zzh-blog-data.oss-cn-hangzhou.aliyuncs.com/img/20250304161527259.png"></p>
+<p>File-level lazy loading系统通常基于OverlayFS，其堆叠（stack）在本地文件系统之上，有四层：lower layer是镜像只读层和目录；upper layer是对只读层的修改；work layer短暂存储文件系统操作的中间状态；merge layer整合upper layer和lower layer，为容器提供文件系统的unified view。容器对根文件系统的访问操作都被OverlayFS重定向到本地的文件系统。</p>
+<p>Page miss时，本地文件系统通知lazy loading module需要从registry上拉取镜像数据。为了减少拉取开销，使用cache来预取和缓存将要使用的page。Block-level lazy loading系统的overlay特性和prefetch cache是基于block layer的。</p>
+<h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><p><a name="FlacIO"></a><br>[1] <a href="https://www.usenix.org/conference/fast25/presentation/liu-yubo">FlacIO: Flat and Collective I/O for Container Image Service</a>.<br><a name="CRFS"></a><br>[2] <a href="https://github.com/google/crfs">Google CRFS</a>.<br><a name="DADI"></a><br>[3] <a href="https://www.usenix.org/conference/atc20/presentation/li-huiba">DADI block-level image service for agile and elastic application deployment</a>.</p>
+]]></content>
+      <categories>
+        <category>Paper</category>
+      </categories>
+      <tags>
+        <tag>Container</tag>
+        <tag>Paper</tag>
       </tags>
   </entry>
   <entry>
@@ -230,7 +230,7 @@
     <content><![CDATA[<p>……</p>
 <span id="more"></span>
 
-<p>VectorCDC<a href="#VectorCDC">[1]</a>是存储顶会FAST’25的论文，主要改进和优化了重复数据删除中的hashless Content-Defined Chunking（CDC）算法。因为我最近在做一些CDC相关的研究和工作，所以对这篇论文很感兴趣，这里记录一下我对这篇论文的理解、总结和思考。因本人水平有限，如有错误，欢迎指正。</p>
+<p>VectorCDC<a href="#VectorCDC">[1]</a>是存储顶会FAST25的论文，主要改进和优化了重复数据删除中的hashless Content-Defined Chunking（CDC）算法。因为我最近在做一些CDC相关的研究和工作，所以对这篇论文很感兴趣，这里记录一下我对这篇论文的理解、总结和思考。因本人水平有限，如有错误，欢迎指正。</p>
 <h1 id="背景和相关知识"><a href="#背景和相关知识" class="headerlink" title="背景和相关知识"></a>背景和相关知识</h1><h2 id="数据重删阶段"><a href="#数据重删阶段" class="headerlink" title="数据重删阶段"></a>数据重删阶段</h2><p>数据重删（Data deduplication）一般来讲分为以下几个阶段：</p>
 <ol>
 <li>Data Chunking，数据分块，将数据分割成固定大小的块，范围一般在1-64KB之间。</li>
