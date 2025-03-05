@@ -39,7 +39,7 @@
 <meta property="og:image" content="https://zzh-blog-data.oss-cn-hangzhou.aliyuncs.com/img/20250305013146257.png">
 <meta property="og:image" content="https://zzh-blog-data.oss-cn-hangzhou.aliyuncs.com/img/20250305013247261.png">
 <meta property="article:published_time" content="2025-02-26T11:17:17.000Z">
-<meta property="article:modified_time" content="2025-03-04T17:46:28.712Z">
+<meta property="article:modified_time" content="2025-03-05T03:21:59.611Z">
 <meta property="article:author" content="Zhihao Zhang">
 <meta property="article:tag" content="Container">
 <meta property="article:tag" content="Paper">
@@ -374,7 +374,7 @@ mjx-container[display="true"] + br {
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-03-05 01:46:28" itemprop="dateModified" datetime="2025-03-05T01:46:28+08:00">2025-03-05</time>
+      <time title="修改时间：2025-03-05 11:21:59" itemprop="dateModified" datetime="2025-03-05T11:21:59+08:00">2025-03-05</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -400,14 +400,14 @@ mjx-container[display="true"] + br {
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>3.4k</span>
+      <span>3.5k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>12 分钟</span>
+      <span>13 分钟</span>
     </span>
 </div>
 
@@ -420,24 +420,28 @@ mjx-container[display="true"] + br {
     <div class="post-body" itemprop="articleBody"><p>……</p>
 <span id="more"></span>
 
-<p>FlacIO<a href="#FlacIO">[1]</a>是存储顶会FAST25的论文，研究方向是容器镜像加速。因为我最近在做一些云计算和虚拟化相关的研究和工作，所以对这篇论文很感兴趣，这里记录一下我对这篇论文的理解、总结和思考。因本人水平有限，如有错误，欢迎指正。</p>
+<p>FlacIO<a href="#FlacIO">[1]</a>是存储顶会FAST25的论文，研究方向是容器镜像加速。因为我最近在做一些云计算和虚拟化相关的研究工作，所以对这篇论文很感兴趣。这里记录一下我对这篇论文的理解、总结和思考。因本人水平有限，如有错误，欢迎指正。</p>
 <h1 id="背景和相关知识"><a href="#背景和相关知识" class="headerlink" title="背景和相关知识"></a>背景和相关知识</h1><h2 id="容器镜像加速"><a href="#容器镜像加速" class="headerlink" title="容器镜像加速"></a>容器镜像加速</h2><p>容器使用较为广泛。容器镜像（container image）的存储栈，通常由远程镜像仓库（remote registry）负责镜像的存储与管理，以及主机节点上的存储驱动（storage driver）用于拉取（pull）镜像并挂载根文件系统（root file system）。</p>
 <p>一个容器镜像由底部的多个只读层（read-only layer）和顶部的一个可写层（writable layer）构成。Storage driver一般使用OverlayFS来堆叠镜像文件，同时管理根文件系统。</p>
-<p>Cold startup需要从远程仓库拉取image并在主机节点上启动容器，由于在容器启动时只需要使用镜像中的一小部分数据，full image loading会有较长的容器启动延迟，同时网络带宽利用率也较低。目前有两种优化方法。</p>
+<p>容器冷启动（Cold startup）时需要从远程仓库拉取image并在主机节点上启动容器。容器启动时往往只需要使用镜像中的一小部分数据，因此full image loading会有较长的容器启动延迟，同时网络带宽利用率也较低。目前有两种优化方法。</p>
 <p>首先是Cold Startup Acceleration，主流的优化方法是使用lazy loading来加速容器启动。Lazy loading先加载好镜像metadata，然后再按需加载（on-demand）容器启动时需要的镜像数据，需要哪块就pull &amp; load哪块。</p>
 <p>比较知名且使用广泛的有CRFS<a href="#CRFS">[2]</a>和DADI<a href="#DADI">[3]</a>。CRFS基于FUSE（Filesystem in Userspace），是文件系统层的镜像加速方法，同时提供了stargz的镜像格式。DADI基于TCMU（iSCSI block device in Userspace），是块层的镜像加速方法，也提供了zfile镜像格式。</p>
 <p>Lazy loading进行容器启动时，会频繁地触发I/O操作，并且阻塞镜像服务。现有的lazy loading方法使用预取（prefetching）来减轻这个过程的影响。</p>
 <p>CRFS允许用户在镜像创建过程中将文件按照优先级排列以进行预取。DADI可以通过定制的虚拟块设备（virtual block device）记录块I/O trace，然后在容器启动时根据这些trace预取数据。</p>
-<p>其次是Cold Startup Mitigation，一些方法减少了容器冷启动频率，例如Caching/Sharing，主要是hot/idel containers共享；例如Fork，定制和优化fork机制，基于其他进程快速启动容器；例如P2P Loading，从相邻的peer快速拉取镜像数据。</p>
+<p>其次是Cold Startup Mitigation，例如Caching/Sharing，主要是hot/idel containers共享；例如定制和优化fork机制，基于其他进程快速启动容器；例如P2P Loading，从相邻的peer快速拉取镜像数据。</p>
 <h2 id="Lazy-Loading"><a href="#Lazy-Loading" class="headerlink" title="Lazy Loading"></a>Lazy Loading</h2><p>下图展示了file-level和block-level lazy loading系统：</p>
 <p><img data-src="https://zzh-blog-data.oss-cn-hangzhou.aliyuncs.com/img/20250304161527259.png"></p>
 <p>File-level lazy loading系统通常基于OverlayFS，其堆叠（stack）在本地文件系统之上，有四层：lower layer是镜像只读层和目录；upper layer是对只读层的修改；work layer短暂存储文件系统操作的中间状态；merge layer整合upper layer和lower layer，为容器提供文件系统的unified view。</p>
-<p>容器对根文件系统的访问操作都被OverlayFS重定向到本地的文件系统。Page miss时，本地文件系统通知lazy loading module需要从registry上拉取镜像数据。为了减少拉取开销，使用cache来预取和缓存将要使用的page。Block-level lazy loading系统的overlay特性和prefetch cache是基于block layer的。</p>
+<p>容器对根文件系统的访问操作都被OverlayFS重定向到本地的文件系统。Page miss时，本地文件系统通知lazy loading module从registry上拉取镜像数据。</p>
+<p>为了减少拉取开销，使用cache来预取和缓存将要使用的page。Block-level lazy loading系统的overlay特性和prefetch cache是基于block layer的。</p>
 <p>Container cold startup分为三个阶段：</p>
 <ol>
-<li>Deploy阶段。从registry获得容器运行所需的数据和元数据。</li>
-<li>Running阶段。主机创建容器runtime。</li>
-<li>Ready阶段。主机启动容器并执行entrypoint。</li>
+<li><p>Deploy阶段。从registry获得容器运行所需的数据和元数据。</p>
+</li>
+<li><p>Running阶段。主机创建容器runtime。</p>
+</li>
+<li><p>Ready阶段。主机启动容器并执行entrypoint。</p>
+</li>
 </ol>
 <p>下面作者通过实验展示容器冷启动开销，启动Pytorch容器，然后使用<code>import torch</code>作为entrypoint。主机和registry分别在两个节点上，并通过TCP/IP网络连接。以下是测试结果：</p>
 <p><img data-src="https://zzh-blog-data.oss-cn-hangzhou.aliyuncs.com/img/20250304180406256.png"></p>
@@ -479,7 +483,7 @@ mjx-container[display="true"] + br {
 <li><p>其次，RT对主机I/O栈的影响。当前内核不支持直接加载容器根文件系统的内存状态，需要新的操作系统原语和缓存机制；此外RT应该基于lazy loading，新的I/O栈需要与传统的on-demand loading I/O堆栈兼容。</p>
 </li>
 </ol>
-<p><strong>个人思考</strong>：FlacIO对目前lazy loading系统在容器冷启动时的缺点，即I/O放大和网络带宽利用率分析得较为透彻。看完动机和挑战之后觉得确实需要一种记录容器启动内存状态的方法，但是如果这个方法需要修改内核，那么对性能、稳定性和生产环境部署等方面的影响可能会比较大。</p>
+<p><strong>个人思考</strong>：FlacIO对当前lazy loading系统在容器冷启动场景下的缺陷进行了深入分析，尤其是针对I/O放大和网络带宽利用率低等问题的剖析十分透彻。通过对其动机和挑战的阐述，可以清晰地认识到，确实需要一种能够记录容器启动时内存状态的解决方案来应对这些瓶颈。然而，如果这种方案需要依赖内核修改来实现，可能会带来一系列潜在问题，包括对系统性能的影响、稳定性的风险，以及在生产环境中的部署复杂度增加等。这些问题无疑会对方案的实际落地和推广构成不小的挑战。</p>
 <h1 id="设计"><a href="#设计" class="headerlink" title="设计"></a>设计</h1><p>以下是FlacIO的架构图：</p>
 <p><img data-src="https://zzh-blog-data.oss-cn-hangzhou.aliyuncs.com/img/20250304235950838.png"></p>
 <p>主要包括四个组件：</p>
@@ -535,8 +539,8 @@ mjx-container[display="true"] + br {
 <p><img data-src="https://zzh-blog-data.oss-cn-hangzhou.aliyuncs.com/img/20250305013146257.png"></p>
 <p>文件访问性能基本没有变化。</p>
 <p><img data-src="https://zzh-blog-data.oss-cn-hangzhou.aliyuncs.com/img/20250305013247261.png"></p>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>FlacIO追踪并记录容器启动时的I/O，然后在registry上将其转化为RT存储，等到容器启动时再拉取并载入到RTPC中加速启动过程。</p>
-<p>FlacIO对现有lazy loading系统的分析比较全面，找到了它们的bottlenecks，所以我对背景和动机记录得比较多。而FlacIO的设计点和设计思路并不出人意料，因此对于FlacIO的设计细节我基本上一概而过。但是FlacIO的设计点非常清晰且全面，基本上涵盖了一个完整系统的所有细节。FlacIO是基于openEuler的，之后可能也会开源。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>FlacIO追踪并记录容器启动时的I/O，然后在registry上将其转化为RT存储。当容器再次启动时，这些数据会被拉取并加载到 RTPC 中，从而加速启动过程。</p>
+<p>FlacIO 对现有的 lazy loading 系统进行了全面分析，精准定位了其性能瓶颈，因此我在背景和动机部分做了较为详细的记录。相比之下，FlacIO 的设计思路和核心理念并不令人意外，所以对其设计细节仅做了简要概述。不过，FlacIO 的设计点非常清晰且全面，几乎涵盖了一个完整系统所需的全部细节。FlacIO 基于 openEuler 开发，未来可能会开源。</p>
 <h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><p><a name="FlacIO"></a><br>[1] <a target="_blank" rel="noopener" href="https://www.usenix.org/conference/fast25/presentation/liu-yubo">FlacIO: Flat and Collective I/O for Container Image Service</a>.<br><a name="CRFS"></a><br>[2] <a target="_blank" rel="noopener" href="https://github.com/google/crfs">Google CRFS</a>.<br><a name="DADI"></a><br>[3] <a target="_blank" rel="noopener" href="https://www.usenix.org/conference/atc20/presentation/li-huiba">DADI block-level image service for agile and elastic application deployment</a>.</p>
 
     </div>
