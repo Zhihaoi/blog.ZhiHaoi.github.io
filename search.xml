@@ -203,6 +203,38 @@
       </tags>
   </entry>
   <entry>
+    <title>如何在Overleaf中使用latexdiff</title>
+    <url>/2025/03/15/latexdiff/</url>
+    <content><![CDATA[<p>……</p>
+<span id="more"></span>
+
+<p>latexdiff可视化地显示两个文件（版本）之间的显著差异。我想通过在overleaf中使用latexdiff，输出两个不同的PDF文件，一个PDF文件只显示原文，另外一个PDF文件显示两个版本之间的差异。</p>
+<p>目前在main文件夹下，有main.tex（当前版本）和main-old.tex（旧版本）文件，同时包含old，figs子文件夹，如下图所示。</p>
+<p><img data-src="https://zzh-blog-data.oss-cn-hangzhou.aliyuncs.com/img/20250315152425325.png"></p>
+<p>main.tex中通过$\input{1-Abstract}$等命令将当前版本的文件包括进来，当前版本的1-Abstract.tex等文件放在main&#x2F;中。</p>
+<p>main-old.tex中通过$\input{old&#x2F;1-Abstract}$等命令将旧版本的文件包括进来，旧版本的1-Abstract.tex等文件放在main&#x2F;old&#x2F;中。</p>
+<p>有两种方法可以用来生成“差异可视化PDF文件”。</p>
+<h1 id="latexmkrc"><a href="#latexmkrc" class="headerlink" title="latexmkrc"></a>latexmkrc</h1><p>第一种方法是使用latexmkrc，即在main&#x2F;下面创建一个latexmkrc文件，并将下列内容放进去：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$pdflatex = &quot;latexdiff main-old.tex main.tex --flatten &gt; main-d.tex; pdflatex %O  main-d&quot;</span><br></pre></td></tr></table></figure>
+
+<p>其中$–flatten$参数将$\input$展开。此时不管是编译main.tex还是main-old.tex文件，都能得到“差异可视化PDF文件”。</p>
+<p>如果想得到原文件，则要将latexmkrc文件里面的命令注释掉：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># $pdflatex = &quot;latexdiff main-old.tex main.tex --flatten &gt; main-d.tex; pdflatex %O  main-d&quot;</span><br></pre></td></tr></table></figure>
+
+<p>这时编译main.tex得到的是当前版本的PDF文件，编译main-old.tex得到的是旧版本的PDF文件。</p>
+<p>这种方法不方便的地方在于需要手动注释&#x2F;消除注释掉latexmkrc中的命令。</p>
+<h1 id="diff-tex"><a href="#diff-tex" class="headerlink" title="diff.tex"></a>diff.tex</h1><p>第二种方法是使用一个单独的diff.tex文件（放在main&#x2F;下），并将下列内容放进去：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">\RequirePackage&#123;shellesc&#125;</span><br><span class="line">\ShellEscape&#123;latexdiff main-old.tex main.tex --flatten &gt; main-d.tex&#125;</span><br><span class="line">\input&#123;main-d&#125;</span><br></pre></td></tr></table></figure>
+
+<p>此时编译main.tex得到的是当前版本的PDF文件，编译diff.tex得到的是“差异可视化PDF文件”，不需要手动注释&#x2F;消除注释。</p>
+<p>下图为“差异可视化PDF文件”的某部分，其中红色是旧版本中的内容，蓝色是当前版本的内容。</p>
+<p><img data-src="https://zzh-blog-data.oss-cn-hangzhou.aliyuncs.com/img/20250315152707712.png"></p>
+]]></content>
+      <tags>
+        <tag>latex</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Hexo和Github Pages搭建博客</title>
     <url>/2025/02/19/hexo-install/</url>
     <content><![CDATA[<p>……</p>
@@ -362,7 +394,7 @@
 <p><img data-src="https://zzh-blog-data.oss-cn-hangzhou.aliyuncs.com/img/20250306234629587.png"></p>
 <p>这里说明了五帝都源自同一个姓氏，但是国号不同。帝禹的国号是夏后，后来帝禹又改称为姒氏。契的国号是商，姓子氏。弃的国号是周，姓姬氏（先秦时期姓和氏是不同的，但是在这里太史公混淆了）。</p>
 <p><img data-src="https://zzh-blog-data.oss-cn-hangzhou.aliyuncs.com/img/20250306235109973.png"></p>
-<p>五帝本纪最后，太史公写了说明和议论，这里贴上全部译文。</p>
+<p>《五帝本纪》最后，太史公写了说明和议论，这里贴上全部译文。</p>
 <p>太史公说：有不少学者讲述过五帝之事，但五帝的时代久远，《尚书》也只是记载了尧以后的事情；各家学派讲述黄帝的事情不少，但内容荒诞不经，有身份有头脑的人是不会相信那些话的。孔门教学用过的《宰予问五帝德》和《帝系姓》，不是儒家的经典，不被某些儒者所承认。我曾向西到过空桐山，向北到过涿鹿，向东到过大海边，向南曾渡过淮河长江，在我所到的相关地区，都曾听到过当地长老讲述黄帝或是讲述尧、舜的事情，而这些不同地区的风土人情也的确不同，因此总的感觉还是古文典籍的说法比较接近事实。我读过《春秋》、《国语》，其中对《五帝德》、《帝系姓》中一些说法的阐发是很清楚的，问题只是人们没作深入的研究，其实这两本书所表述的观点还是比较切实可信的。《尚书》有很多散佚，到现在已经相当久远了，其所散佚的内容偶尔还能从其他著作中见到。如果不是好学深思，真正对古代传说有所理解，是很难对那些学识浅陋的人说清楚的。于是我选择较为确实可信的材料，编排阐发，写成了这“本纪”部分的第一篇。</p>
 <p><img data-src="https://zzh-blog-data.oss-cn-hangzhou.aliyuncs.com/img/20250306235721552.png"><br><img data-src="https://zzh-blog-data.oss-cn-hangzhou.aliyuncs.com/img/20250306235734208.png"></p>
 ]]></content>
@@ -381,7 +413,7 @@
 <!-- 有多少风流人物？盗跖庄蹻流誉后，更陈王奋起挥黄钺。 -->
 <span id="more"></span>
 
-<h1 id="夏本纪"><a href="#夏本纪" class="headerlink" title="夏本纪"></a>夏本纪</h1><p>本纪第二为夏本纪。“过去人们把夏王朝的历史通通归于“传说”范畴，甚至连大禹有无其人也有人持怀疑态度。近些年来随着商朝考古的巨大进展，尤其是 “夏商周工程”的启动，事实已经证明《殷本纪》所记的商朝世系是符合科学实际的。既然商朝的世系符合实际，那么夏朝的情况又当如何呢？在“夏商周工程”所发表的阶段报告中，已经肯定了《夏本纪》所列的夏朝世系，并将夏王朝存在的年代确定在公元前2070至前1600。—摘自韩版”</p>
+<h1 id="夏本纪"><a href="#夏本纪" class="headerlink" title="夏本纪"></a>夏本纪</h1><p>本纪第二为《夏本纪》。“过去人们把夏王朝的历史通通归于“传说”范畴，甚至连大禹有无其人也有人持怀疑态度。近些年来随着商朝考古的巨大进展，尤其是 “夏商周工程”的启动，事实已经证明《殷本纪》所记的商朝世系是符合科学实际的。既然商朝的世系符合实际，那么夏朝的情况又当如何呢？在“夏商周工程”所发表的阶段报告中，已经肯定了《夏本纪》所列的夏朝世系，并将夏王朝存在的年代确定在公元前2070至前1600。—摘自韩版”</p>
 <p>禹是黄帝的玄孙，夏是帝禹的国号，禹的父亲是鲧（一说鲧封于崇，称崇伯鲧），鲧的父亲是帝颛顼，禹是帝颛顼的孙子，而上章说到舜是帝颛顼的六世孙，按辈分，禹应为舜的高祖辈😓。</p>
 <p>有注释说“他们俩能相见已属难得，且禹的年龄理应远大于舜。然而，当舜命禹治水时，禹才刚娶涂山之女，之后又接受舜的禅让，在位十七年后崩于会稽。由此推断，禹的年龄实则小于舜，这岂合常理！”</p>
 <p><img data-src="https://zzh-blog-data.oss-cn-hangzhou.aliyuncs.com/img/20250307001129337.png"></p>
@@ -401,15 +433,80 @@
 <p>有扈氏就不服了，一说“扈为夏同姓之国。有扈见尧、舜受禅，启独继父，故不服”。又有一说“有扈为启之兄弟”，“有扈，启之庶兄，以尧、舜举贤，禹独与子，故伐启”。</p>
 <p>启与有扈氏大战于甘（今洛阳市西南），启作了一篇誓词《甘誓》，召来六军的将领申明这一誓词。然后灭了有扈氏，天下咸朝。</p>
 <p><img data-src="https://zzh-blog-data.oss-cn-hangzhou.aliyuncs.com/img/20250307232531057.png"></p>
-<p>夏后帝启驾崩，儿子太康即为，太康因为耽于游乐而失去国位（一说为被有扈氏之后“羿”所灭）。太康之后弟弟中康继位。</p>
+<p>夏后帝启驾崩，儿子太康继位，太康因为耽于游乐而失去国位（一说为被有扈氏之后“羿”所灭）。太康之后弟弟中康继位。</p>
 <p><img data-src="https://zzh-blog-data.oss-cn-hangzhou.aliyuncs.com/img/20250307233434587.png"></p>
 <p>随后简要记载了夏朝的帝王世系。</p>
 <p><img data-src="https://zzh-blog-data.oss-cn-hangzhou.aliyuncs.com/img/20250307234037522.png"></p>
 <p>至夏桀（履癸）时，自孔甲以来诸侯多已叛离。桀不思修德振国，反以武力压迫百官，致朝野怨声载道。桀曾囚（商）汤于夏台（今河南禹州），后将其释放。汤修德政，诸侯归心，遂起兵伐桀。桀败走鸣条（一说在今河南封丘东，也有一说在今山西运城安邑镇北），终死于逃亡途中。临终悔道：”早知今日，当在夏台诛汤。”汤继位，建立商朝，分封夏后裔，到周朝时夏后裔被封在杞国（今河南杞县）。</p>
 <p><img data-src="https://zzh-blog-data.oss-cn-hangzhou.aliyuncs.com/img/20250307234241378.png"><br><img data-src="https://zzh-blog-data.oss-cn-hangzhou.aliyuncs.com/img/20250307234258135.png"></p>
-<p>夏本纪最后，太史公也写了说明和议论，这里贴上全部译文。</p>
+<p>《夏本纪》最后，太史公也写了说明和议论，这里贴上全部译文。</p>
 <p>太史公说：禹姓姒，他的后代分封，就以所分封的国为姓，所以有夏后氏、有扈氏、有男氏、斟寻氏、彤城氏、褒氏、费氏、杞氏、缯氏、辛氏、冥氏、斟戈氏等不同的姓氏。孔子校正夏代的历法，所以学者中有很多人传授《夏小正》。从虞、夏时期开始，贡纳赋税的制度就已经很完备了。<br>有人说禹在江南召集诸侯，考核诸侯功绩时去世，因此就安葬在那里，将该地命名为会稽。会稽，意即会计，就是会集诸候核计其功绩的意思。</p>
 <p><img data-src="https://zzh-blog-data.oss-cn-hangzhou.aliyuncs.com/img/20250307234749733.png"></p>
+]]></content>
+      <categories>
+        <category>史记</category>
+      </categories>
+      <tags>
+        <tag>史记</tag>
+        <tag>历史</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>读书笔记-史记（四）</title>
+    <url>/2025/03/13/shiji-4/</url>
+    <content><![CDATA[<p>一片汪洋都不见，知向谁边？</p>
+<span id="more"></span>
+
+<h1 id="殷本纪"><a href="#殷本纪" class="headerlink" title="殷本纪"></a>殷本纪</h1><p>本纪第三为《殷本纪》。2000年发表的《夏商周年表》与《殷本纪》所谱列的顺序相同，商朝的统治年限为前1600一前1046，共历时554年。</p>
+<p>商朝的始祖是殷契（xiè, “契始封商，其后裔盘庚迁殷，殷在邺南，遂为天下号。契是殷家始祖，故言‘殷契’。殷，地名，即今所谓“殷墟”，在今河南安阳西北小屯村一带。”），母亲是简狄，为帝喾次妃。天命玄鸟（燕子），降而生商。契长大后，辅佐大禹治水（据《夏本纪》，和禹一同治水的是“益”与“后稷”）。在帝舜时期担任司徒（古代三公之一，主管民政）。契被封在商地，赐姓子氏。契所在的氏族在尧、舜、禹期间发展起来。</p>
+<p><img data-src="https://zzh-blog-data.oss-cn-hangzhou.aliyuncs.com/img/20250313004842124.png"></p>
+<p>从契至汤（成汤，又名天乙）历经十四代，并经过八次迁都。汤建都在毫邑（今河南省商丘附近）。成汤说：“我说过，人从水中可以照见自己的容貌，从众人的反应中可以得知政治是否清明。”</p>
+<p>伊尹说：“这话说得很好，能听取百官的意见，帝王的管理水平才能提高。要治好国家，管好黎民，就得让能办事的人都各在其位。努力呀，努力呀！”</p>
+<p><img data-src="https://zzh-blog-data.oss-cn-hangzhou.aliyuncs.com/img/20250313010004269.png"><br><img data-src="https://zzh-blog-data.oss-cn-hangzhou.aliyuncs.com/img/20250313010510596.png"></p>
+<p>伊尹又称阿衡（一说是官名），早年微贱，他想见成汤却找不到机缘，于是就做了有莘氏的陪嫁奴仆，背着烹调用具，用做莱的道理比喻治国之道以说服成汤，协助成汤实现了王道的政治。汤破格重用伊尹，委伊尹以国政。伊尹曾一度离开商汤去了夏都，但他不满意夏桀的腐败，又回到商的国都。</p>
+<p><img data-src="https://zzh-blog-data.oss-cn-hangzhou.aliyuncs.com/img/20250313235820134.png"></p>
+<p>成汤的小故事一则。说有一天，成汤外出打猎，看到猎人围绕着猎场四周布网，猎人祈祷说：“愿天下四方的鸟兽都落入我的网中。”成汤说：“唉，这不是要把它们一网打尽了吗？”于是他下令撤去三面的网，并将祷告词改为：“想从左边走的，往左；想从右边走的，往右；不听从指挥的，才落入我的罗网。”诸侯们得知后，说：“成汤的仁德真是无以复加了，连禽兽都能蒙受他的恩泽。”</p>
+<p><img data-src="https://zzh-blog-data.oss-cn-hangzhou.aliyuncs.com/img/20250314000523422.png"></p>
+<p>夏桀施行暴政，荒淫无道，诸侯中的昆吾氏（一说在今河南许昌东）也为非作歹。成汤于是率诸侯讨伐昆吾氏，伊尹随汤出征。成汤击败昆吾氏后，乘胜讨伐夏桀，并作了《汤誓》通告全军。</p>
+<p>人们非常恨夏桀，夏桀自比<strong>太阳</strong>，所以人们说：“<strong>时日曷（hé）丧，予与汝皆亡</strong>”。这句话的意思是“你这太阳何时消亡，我情愿与你同归于尽”。</p>
+<p>成汤说“我很勇武”，于是自己号称为武王。</p>
+<p><img data-src="https://zzh-blog-data.oss-cn-hangzhou.aliyuncs.com/img/20250314000701170.png"></p>
+<p>夏桀被打败，逃到了鸣条（今河南封丘东），夏朝的军队被彻底消灭，夏朝从此灭亡。</p>
+<p>成汤战胜夏桀后，想改换夏朝所祭祀的土神（一说为共工之子句龙，治水有功），但是改换不了，因而作了《夏社》。</p>
+<p>伊尹向各地诸侯发出通告，各地诸侯都表示归附商朝，于是成汤践天子位，平定海内。</p>
+<p><img data-src="https://zzh-blog-data.oss-cn-hangzhou.aliyuncs.com/img/20250314005455508.png"></p>
+<p>成汤灭了夏朝后，回到毫都，遂作《汤诰》以告谕天下。让各地诸侯与各国君主必须多给黎民百姓作贡献，勤勤恳恳地做好自己的工作，并从禹、皋陶、后稷与蚩尤的正反两面中吸取救训。</p>
+<p>成汤实行新历法，改正朔即改用新历法。正朔是一年中第一个月的第一天。夏朝是以阴历正月（建寅月）为岁首，商朝是以阴历十二月（建丑月） 为岁首，周朝是以阴历十一月（建子月）为岁首，秦朝是以阴历十月（建亥月）为岁首。</p>
+<p>又变换服饰，崇尚白色。夏尚黑，商尚白，周尚赤。群臣朝见帝王商议国事也定在白天。</p>
+<p><img data-src="https://zzh-blog-data.oss-cn-hangzhou.aliyuncs.com/img/20250314010310290.png"><br><img data-src="https://zzh-blog-data.oss-cn-hangzhou.aliyuncs.com/img/20250314010324586.png"></p>
+<p>成汤去世后，汤的儿子太丁、外丙、中壬继位。之后伊尹让太丁之子成汤的嫡长孙太甲继位。</p>
+<p><img data-src="https://zzh-blog-data.oss-cn-hangzhou.aliyuncs.com/img/20250314011044844.png"></p>
+<p>帝太甲在位三年，昏庸暴虐，不遵守成汤定下的制度，德行丑恶，伊尹便把他放逐到桐宫（一说在今河南偃师附近）。</p>
+<p>这期间，伊尹摄政代替太甲治理国事，接受诸侯的朝见。太甲在桐宫住了三年，他悔过自省，改恶从善，伊尹便将他接了回来，把政权交还给他。</p>
+<p>太甲经过修炼提高了道德，诸侯对他表示归附，百姓的生活也都很安宁。</p>
+<p>为嘉奖太甲的错而能改，伊尹作了《太甲训》两篇，并且褒扬太甲，称他为“太宗”。古代开国帝王之庙号可称为“高祖”或“太 祖”，其继世帝王有圣德著于世者可称为“太宗”。</p>
+<p><img data-src="https://zzh-blog-data.oss-cn-hangzhou.aliyuncs.com/img/20250314011356155.png"></p>
+<p>沃丁为帝时，伊尹去世，葬在了毫都。到帝雍己时，商朝的国力渐弱，有的诸侯已经不来朝拜。</p>
+<p><img data-src="https://zzh-blog-data.oss-cn-hangzhou.aliyuncs.com/img/20250314011743427.png"></p>
+<p>到帝太戊时，任用贤臣伊陟为相。一说伊陟为伊尹之子，一说汤到太戊有七世，而伊尹的儿子伊陟才担任相，他们的寿命差距如此悬殊。</p>
+<p>伊陟劝太戊修德，并重用贤臣。殷朝重新兴旺，诸侯都来归顺，为此，称太戊为“中宗”。使国家中兴之君，庙号可称“中宗”。</p>
+<p><img data-src="https://zzh-blog-data.oss-cn-hangzhou.aliyuncs.com/img/20250314012054782.png"></p>
+<p>盘庚即位之前，殷朝建都在黄河以北。盘庚即位后率众迁到了黄河以南，重又回到了成汤时的故都毫邑（今河南偃师商城或郑州商城）。《竹书纪年》说盘庚是由黄河东南的奄（今山东曲阜）迁往黄河以北的殷墟（今河南安阳西北小屯村）。</p>
+<p><img data-src="https://zzh-blog-data.oss-cn-hangzhou.aliyuncs.com/img/20250315005316536.png"></p>
+<p>武丁继位三年之内不动声色，把政务交给太宰。武丁夜里梦见一位名叫“说”的能人，然后在傅险（今山西平陆东）这个地方找到了。当时那个叫“说”的人是个苦役犯，正在傅险修路。武丁破格任用他为宰相，殷朝被他治理得很有起色。于是武丁就将傅险作为他的姓氏，称他为傅说（傅说举于版筑之间）。</p>
+<p><img data-src="https://zzh-blog-data.oss-cn-hangzhou.aliyuncs.com/img/20250315005809382.png"></p>
+<p>帝武乙做了个木偶，说它是天神，武乙要和这个“天神”较量，他让人替“天神”投掷，“天神”输了，于是武乙就侮辱 他。武乙用皮革做了一条口袋，里面装满了血，他把这个口袋挂得高高的，从下面往上射，说这是“射天”。</p>
+<p>武乙到黄河与渭水汇合的地方打猎，遇着打雷，被击死了。</p>
+<p><img data-src="https://zzh-blog-data.oss-cn-hangzhou.aliyuncs.com/img/20250315010658195.png"></p>
+<p>帝乙的长子是微子启。小儿子叫辛，辛的母亲是王后，所以帝乙死后，其子辛继位，这就是帝辛（又称受），天下称之为纣。</p>
+<p><img data-src="https://zzh-blog-data.oss-cn-hangzhou.aliyuncs.com/img/20250315010924551.png"></p>
+<p>帝纣天资聪敏，反应快，力气超常，能空手与猛兽格斗😢。</p>
+<p>知（智）足以距（拒）谏，言足以饰非。即帝纣的才智足以使他挡回任何劝谏，他的能言善辩足以帮他文过饰非。</p>
+<p>帝纣喜欢在群臣面前夸示自己的才干，希望让自己的名声高过普天下的任何人，他认为天底下没有一个人能与他相比。</p>
+<p>帝纣喜欢饮酒作乐，贪恋女色。他宠爱妲己（有苏氏），唯妲己之言是听。他让乐工师涓谱制淫荡的曲子，他用北方的淫靡之舞配合这种靡靡之乐。</p>
+<p>帝纣横征暴敛以填满鹿台（今河南淇县）的线库和巨桥的粮仑。他扩建沙丘（今河北平乡东北，战国时属赵，赵武灵王饿死于此，后秦始皇东巡又死于此）的亭台园圃，搜罗各种珍禽异兽置于其中。</p>
+<p>帝纣从来不敬神。他把许多乐工戏子叫到沙丘来，他用酒灌成池沼，把肉悬挂成林，让男男女女光着身子在里面追逐嬉戏，彻夜不息（酒池肉林）。</p>
+<p><img data-src="https://zzh-blog-data.oss-cn-hangzhou.aliyuncs.com/img/20250315011140481.png"></p>
 ]]></content>
       <categories>
         <category>史记</category>
